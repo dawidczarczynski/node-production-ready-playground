@@ -1,0 +1,4 @@
+# Mocha configuration
+
+--require ts-node/register
+test/**/*.spec.ts

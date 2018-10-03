@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "./app",
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "removeComments": true,
     "noImplicitReturns": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "preserveConstEnums": true,
     "outDir": "build"
   },
@@ -14,6 +15,7 @@
     "/app"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test"
   ]
 }
