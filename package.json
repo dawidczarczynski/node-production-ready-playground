@@ -1,0 +1,23 @@
+{
+  "name": "hyperion-microservice",
+  "version": "1.0.0",
+  "description": "Node microservice boilerplate",
+  "main": "server.js",
+  "author": "Dawid <dawidczarczynski@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf build && tsc",
+    "start:dev": "nodemon",
+    "start": "npm run build && node build/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
