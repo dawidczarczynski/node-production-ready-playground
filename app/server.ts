@@ -1,11 +1,10 @@
-import * as express from 'express'
 import { config } from './config'
+import server from './app'
 
-const app = express()
+const { PORT } = config
 
-app.listen(config.PORT, () => {
-  console.log(`Server is listening at port ${config.PORT}`)
-  app.get('/', (req: express.Request, res: express.Response) => {
-    res.send('OK!')
-  })
-})
+server.listen(PORT, (error: Error) =>
+  error
+    ? console.log(error)
+    : console.log(`Server is listening at port ${PORT}`)
+)
