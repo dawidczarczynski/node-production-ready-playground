@@ -3,7 +3,7 @@
     "baseUrl": "./app",
     "target": "es2015",
     "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "node"],
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,

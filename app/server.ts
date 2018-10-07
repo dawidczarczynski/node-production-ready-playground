@@ -1,10 +1,22 @@
+import 'reflect-metadata'
+import { InversifyExpressServer } from 'inversify-express-utils'
+import * as bodyParser from 'body-parser'
+
 import { config } from './config'
-import server from './app'
+import { uncaughtErrorHandler } from './utils'
+import container from './container'
+import './user/user.controller'
 
 const { PORT } = config
+const server = new InversifyExpressServer(container)
 
-server.listen(PORT, (error: Error) =>
-  error
-    ? console.log(error)
-    : console.log(`Server is listening at port ${PORT}`)
-)
+server.setConfig(app => {
+  app.use(bodyParser.json())
+})
+
+server
+  .build()
+  .listen(PORT)
+
+process.on('uncaughtException', uncaughtErrorHandler)
+process.on('unhandledRejection', uncaughtErrorHandler)
