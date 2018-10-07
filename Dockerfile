@@ -36,8 +36,8 @@ RUN yarn install --production
 
 # Set environment variables
 ENV NODE_ENV="prod"
-ENV PORT=4200
+ENV PORT=80
 
-EXPOSE 4200
+EXPOSE 80
 
 CMD [ "pm2-runtime", "server.js" ]
