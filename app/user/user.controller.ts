@@ -16,4 +16,5 @@ export default class UserController {
 
     return this._userService.getUser(id)
   }
+
 }

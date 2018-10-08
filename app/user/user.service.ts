@@ -6,7 +6,7 @@ export class UserService {
   getUser (userId: number) {
     return ({
       userId,
-      name: 'Some User'
+      name: 'Some USER1'
     })
   }
 

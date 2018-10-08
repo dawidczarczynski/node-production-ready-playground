@@ -1,0 +1,24 @@
+# Development image
+FROM node:8
+
+# Create work dir
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Copy dependencies files
+COPY package.json yarn.lock ./
+
+# Install dependencies
+RUN yarn
+
+# Copy source files 
+COPY . .
+
+# Set environment variables
+ENV NODE_ENV="development"
+ENV PORT=80
+
+EXPOSE 80
+
+# Run development server
+CMD ["yarn", "start"]
