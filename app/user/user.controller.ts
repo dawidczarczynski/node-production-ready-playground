@@ -1,20 +1,39 @@
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { inject } from 'inversify'
-import { controller, httpGet } from 'inversify-express-utils'
+import { controller, httpGet, httpPost, httpPatch, httpDelete, response, request } from 'inversify-express-utils'
 import { UserService } from './user.service'
 
 @controller('/user')
 export default class UserController {
 
-  constructor (@inject(UserService) private _userService: UserService) {
-    console.log('Construtcting user controler')
+  constructor (@inject(UserService) private _userService: UserService) {}
+
+  @httpGet('/')
+  public getAllUsers () {
+    return this._userService.getAllUsers()
   }
 
   @httpGet('/:id')
-  public getUser (request: Request) {
+  public getUser (
+    @request() request: Request
+  ) {
     const { id } = request.params
-
     return this._userService.getUser(id)
+  }
+
+  @httpPost('/')
+  public createUser (request: Request) {
+    console.log('create user')
+  }
+
+  @httpPatch('/:id')
+  public updateUser (request: Request) {
+    console.log('update user')
+  }
+
+  @httpDelete('/:id')
+  public deleteUser (request: Request) {
+    console.log('delete user')
   }
 
 }

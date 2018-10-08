@@ -1,7 +1,8 @@
 import { Container } from 'inversify'
-import { UserService } from './user/user.service'
+import { userContainer } from './user/user.container'
+import { databaseContainer } from './database/database.container'
 
 const container = new Container()
-container.bind<UserService>(UserService).toSelf()
+container.load(databaseContainer, userContainer)
 
 export default container

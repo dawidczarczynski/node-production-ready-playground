@@ -1,20 +1,25 @@
-import { injectable } from 'inversify'
+import { injectable, inject } from 'inversify'
+import { UserRepository } from '../user/user.repository'
+import { IUser } from 'user/user.interface'
 
 @injectable()
 export class UserService {
 
-  getUser (userId: number) {
-    return ({
-      userId,
-      name: 'Some USER1'
-    })
+  constructor (@inject(UserRepository) private _repo: UserRepository) {}
+
+  public async getUser (_id: number): Promise<IUser> {
+    try {
+      const user = await this._repo.find({ _id })
+      if (!user) throw new Error('User not found')
+
+      return user
+    } catch (ex) {
+      throw new Error('Cannot retreive user')
+    }
   }
 
   getAllUsers () {
-    return [
-      { userId: 1, name: 'Some User' },
-      { userId: 2, name: 'Some User2' }
-    ]
+    return this._repo.getAll()
   }
 
 }
