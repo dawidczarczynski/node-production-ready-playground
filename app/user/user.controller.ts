@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { inject } from 'inversify'
 import { controller, httpGet, httpPost, httpPatch, httpDelete, response, request } from 'inversify-express-utils'
+import * as joi from 'joi'
+
 import { UserService } from './user.service'
 
 @controller('/user')
@@ -9,7 +11,7 @@ export default class UserController {
   constructor (@inject(UserService) private _userService: UserService) {}
 
   @httpGet('/')
-  public getAllUsers () {
+  public async getAllUsers () {
     return this._userService.getAllUsers()
   }
 

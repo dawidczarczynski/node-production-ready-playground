@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify'
 import { UserRepository } from '../user/user.repository'
-import { IUser } from 'user/user.interface'
+import { IUser } from './model/user.interface'
 import { NotFoundError } from '../errors'
 import { UserError } from './user-error.enum'
 
@@ -17,7 +17,7 @@ export class UserService {
     return user
   }
 
-  getAllUsers () {
+  public async getAllUsers () {
     return this._repo.getAll()
   }
 

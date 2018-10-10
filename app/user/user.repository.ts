@@ -1,36 +1,20 @@
-import { injectable, inject } from 'inversify'
-import { Types } from 'mongoose'
+import { inject } from 'inversify'
+import { Schema } from 'mongoose'
 
 import { Database } from '../database/database'
-import { USER_MODEL } from './user.schema'
-import { IUser } from './user.interface'
-import { InternalError } from '../errors'
+import { GenericRepository } from '../generics/generic.repository'
 
-@injectable()
-export class UserRepository {
+import { IUser } from './model/user.interface'
+import { USER_TYPES } from './ioc/user.types'
 
-  constructor (@inject(Database) private _db: Database) {}
+export class UserRepository extends GenericRepository<IUser> {
 
-  public async model () {
-    const instance = await this._db.connect()
-
-    return instance
-      .model<IUser>(USER_MODEL)
-  }
-
-  public async findOne (id: string): Promise<IUser> {
-    const model = await this.model()
-
-    return model.findById(id, (error) => {
-      if (error) throw new InternalError('Database error')
-    })
-  }
-
-  public async getAll (): Promise<IUser[]> {
-    const model = await this.model()
-
-    return model
-      .find()
+  constructor (
+    @inject(Database) db: Database,
+    @inject(USER_TYPES.schema) schema: Schema,
+    @inject(USER_TYPES.model) model: string
+  ) {
+    super(db, schema, model)
   }
 
 }

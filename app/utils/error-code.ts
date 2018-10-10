@@ -1,4 +1,4 @@
-import { InternalError, NotFoundError } from '../errors'
+import { InternalError, NotFoundError, BadRequestError } from '../errors'
 
 enum ErrorCode {
   BAD_REQUEST = 400,
@@ -8,6 +8,7 @@ enum ErrorCode {
 
 export const errorCodeFactory = (error: Error): number => {
 
+  if (error instanceof BadRequestError) return ErrorCode.BAD_REQUEST
   if (error instanceof InternalError) return ErrorCode.INTERNAL_SERVER_ERROR
   if (error instanceof NotFoundError) return ErrorCode.NOT_FOUND
 

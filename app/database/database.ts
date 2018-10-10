@@ -2,8 +2,8 @@ import * as Mongoose from 'mongoose'
 import { injectable } from 'inversify'
 
 import { config } from '../config'
-import { DBMessages } from './db-messages.enum'
-import { DBEvents } from './db-events.enum'
+import { DBMessages } from './database-messages.enum'
+import { DBEvents } from './database-events.enum'
 
 @injectable()
 export class Database {
