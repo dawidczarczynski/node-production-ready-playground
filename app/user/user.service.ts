@@ -1,21 +1,20 @@
 import { injectable, inject } from 'inversify'
 import { UserRepository } from '../user/user.repository'
 import { IUser } from 'user/user.interface'
+import { NotFoundError } from '../errors'
+import { UserError } from './user-error.enum'
 
 @injectable()
 export class UserService {
 
   constructor (@inject(UserRepository) private _repo: UserRepository) {}
 
-  public async getUser (_id: number): Promise<IUser> {
-    try {
-      const user = await this._repo.find({ _id })
-      if (!user) throw new Error('User not found')
+  public async getUser (id: string): Promise<IUser> {
+    const user = await this._repo.findOne(id)
 
-      return user
-    } catch (ex) {
-      throw new Error('Cannot retreive user')
-    }
+    if (!user) throw new NotFoundError(UserError.NOT_FOUND)
+
+    return user
   }
 
   getAllUsers () {

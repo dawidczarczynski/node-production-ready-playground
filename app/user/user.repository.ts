@@ -1,8 +1,10 @@
 import { injectable, inject } from 'inversify'
+import { Types } from 'mongoose'
 
+import { Database } from '../database/database'
 import { USER_MODEL } from './user.schema'
 import { IUser } from './user.interface'
-import { Database } from '../database/database'
+import { InternalError } from '../errors'
 
 @injectable()
 export class UserRepository {
@@ -16,11 +18,12 @@ export class UserRepository {
       .model<IUser>(USER_MODEL)
   }
 
-  public async find (id: string): Promise<IUser> {
+  public async findOne (id: string): Promise<IUser> {
     const model = await this.model()
 
-    return model
-      .findById(id)
+    return model.findById(id, (error) => {
+      if (error) throw new InternalError('Database error')
+    })
   }
 
   public async getAll (): Promise<IUser[]> {

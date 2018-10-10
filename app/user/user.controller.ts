@@ -14,7 +14,7 @@ export default class UserController {
   }
 
   @httpGet('/:id')
-  public getUser (
+  public async getUser (
     @request() request: Request
   ) {
     const { id } = request.params

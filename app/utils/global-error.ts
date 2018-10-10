@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from 'express'
+import { errorCodeFactory } from './error-code'
 
 export const globalErrorHandler = (
   error: Error,
@@ -6,8 +7,11 @@ export const globalErrorHandler = (
   response: Response,
   next: NextFunction
 ) => {
+
+  const code = errorCodeFactory(error)
   const { message } = error
+
   response
-    .status(400)
+    .status(code)
     .json({ error: message })
 }
