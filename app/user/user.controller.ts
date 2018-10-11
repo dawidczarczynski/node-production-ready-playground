@@ -1,12 +1,10 @@
 import { Request } from 'express'
-import { inject } from 'inversify'
 import {
   controller,
   httpGet,
   httpPost,
   httpPatch,
   httpDelete,
-  response,
   request,
   requestParam
 } from 'inversify-express-utils'
@@ -17,7 +15,7 @@ import { userValidator } from './user.validator'
 @controller('/user')
 export default class UserController {
 
-  constructor (@inject(UserService) private _userService: UserService) {}
+  constructor (private _userService: UserService) {}
 
   @httpGet('/')
   public async getAllUsers () {

@@ -6,5 +6,6 @@
 * Docker
 * Node 8 and up
 
-`$ yarn install` 
+`$ yarn install`
+
 `$ docker-compose up`

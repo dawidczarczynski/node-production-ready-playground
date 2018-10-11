@@ -13,7 +13,7 @@ import {
 @injectable()
 export class UserService {
 
-  constructor (@inject(UserRepository) private _repo: UserRepository) {}
+  constructor (private _repo: UserRepository) {}
 
   public async getUser (id: string): Promise<IUser> {
     const user = await this._repo.findOne(id)

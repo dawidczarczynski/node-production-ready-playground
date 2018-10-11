@@ -10,7 +10,7 @@ import { IUserDocument } from './model/user.document'
 export class UserRepository extends GenericRepository<IUserDocument> {
 
   constructor (
-    @inject(Database) db: Database,
+    db: Database,
     @inject(USER_TYPES.schema) schema: Schema,
     @inject(USER_TYPES.model) model: string
   ) {
