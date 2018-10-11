@@ -1,5 +1,5 @@
 import { Container } from 'inversify'
-import { userContainer } from './user/ioc/user.container'
+import { userContainer } from '@user/ioc/user.container'
 
 const container = new Container({
   autoBindInjectable: true,

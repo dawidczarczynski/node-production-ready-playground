@@ -1,4 +1,6 @@
 # Mocha configuration
 
 --require ts-node/register
+--require tsconfig-paths/register
+
 test/**/*.spec.ts

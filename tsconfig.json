@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./app",
     "target": "es2015",
     "lib": ["es6", "dom"],
     "types": ["reflect-metadata", "node"],
@@ -13,13 +12,14 @@
     "preserveConstEnums": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "build"
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["app/*"],
+      "@stubs/*": ["test/stubs/*"]
+    }
   },
-  "filesGlob": [
-    "/app"
-  ],
   "exclude": [
-    "node_modules",
-    "test"
+    "node_modules"
   ]
 }

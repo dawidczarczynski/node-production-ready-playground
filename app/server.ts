@@ -3,9 +3,9 @@ import { InversifyExpressServer } from 'inversify-express-utils'
 import * as bodyParser from 'body-parser'
 
 import { config } from './config'
-import { uncaughtErrorHandler, globalErrorHandler } from './utils'
 import container from './container'
-import './user/user.controller'
+import { uncaughtErrorHandler, globalErrorHandler } from '@utils'
+import '@user/user.controller'
 
 const { PORT } = config
 const server = new InversifyExpressServer(container)

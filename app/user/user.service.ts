@@ -1,14 +1,14 @@
-import { injectable, inject } from 'inversify'
-import { UserRepository } from '../user/user.repository'
+import { injectable } from 'inversify'
 import { IUser } from './model/user.interface'
 import { User } from './model/user'
 import { UserError } from './user-error.enum'
+import { UserRepository } from './user.repository'
 import {
   NotFoundError,
   DbDuplicatedKeyError,
   BadRequestError,
   InternalError
-} from '../errors'
+} from '@errors'
 
 @injectable()
 export class UserService {
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   public async getAllUsers () {
-    return this._repo.getAll()
+    return this._repo.find()
   }
 
   public async createUser ({ username, email }: IUser) {

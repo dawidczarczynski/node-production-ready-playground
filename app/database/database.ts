@@ -2,18 +2,15 @@ import * as Mongoose from 'mongoose'
 import { injectable } from 'inversify'
 
 import { config } from '../config'
+import { IDatabase } from './database.interface'
 import { DBMessages } from './database-messages.enum'
 import { DBEvents } from './database-events.enum'
 
 @injectable()
-export class Database {
+export class Database implements IDatabase {
 
   private _instance: Mongoose.Mongoose
   private _connection: Mongoose.Connection
-
-  get client (): Mongoose.Mongoose {
-    return this._instance
-  }
 
   public async connect () {
     if (this._instance) return this._instance

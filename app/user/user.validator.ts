@@ -1,7 +1,7 @@
 import * as joi from 'joi'
 import { Request, Response, NextFunction } from 'express'
 
-import { BadRequestError } from '../errors'
+import { BadRequestError } from '@errors'
 
 export const userSchema = joi.object({
   username: joi.string()

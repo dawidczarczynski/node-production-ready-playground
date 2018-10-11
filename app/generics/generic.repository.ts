@@ -1,15 +1,14 @@
 import { injectable } from 'inversify'
 import { Schema, Document, Types } from 'mongoose'
 
-import { Database } from '../database/database'
-import { DBErrors } from '../database/database-errors.enum'
-import { DbDuplicatedKeyError, DbInternalError, DbInvalidIdentificator } from '../errors'
+import { IDatabase, DBErrors } from '@database'
+import { DbDuplicatedKeyError, DbInternalError, DbInvalidIdentificator } from '@errors'
 
 @injectable()
 export abstract class GenericRepository<T extends Document> {
 
   constructor (
-    private _db: Database,
+    private _db: IDatabase,
     private _schema: Schema,
     private _model: string
   ) {}
@@ -53,7 +52,7 @@ export abstract class GenericRepository<T extends Document> {
     return model.findById(id)
   }
 
-  public async getAll (): Promise<T[]> {
+  public async find (): Promise<T[]> {
     const model = await this.model()
 
     return model.find()
