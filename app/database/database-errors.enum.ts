@@ -1,3 +1,5 @@
 export enum DBErrors {
-  INVALID_IDENTIFICATOR = 'Invalid format of indetificator'
+  UNKNOW_ERROR = 'Database error occured',
+  INVALID_IDENTIFICATOR = 'Invalid format of identificator',
+  DUPLICATED_KEY = 'Some keys are not unique'
 }

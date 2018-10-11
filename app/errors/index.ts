@@ -1,3 +1,6 @@
+export * from './db-invalid-identificator.error'
+export * from './db-duplicated-key.error'
+export * from './db-internal.error'
 export * from './not-found.error'
 export * from './internal.error'
 export * from './bad-request.error'

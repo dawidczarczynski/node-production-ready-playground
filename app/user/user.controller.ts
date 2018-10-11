@@ -1,9 +1,18 @@
-import { Request, Response } from 'express'
+import { Request } from 'express'
 import { inject } from 'inversify'
-import { controller, httpGet, httpPost, httpPatch, httpDelete, response, request } from 'inversify-express-utils'
-import * as joi from 'joi'
+import {
+  controller,
+  httpGet,
+  httpPost,
+  httpPatch,
+  httpDelete,
+  response,
+  request,
+  requestParam
+} from 'inversify-express-utils'
 
 import { UserService } from './user.service'
+import { userValidator } from './user.validator'
 
 @controller('/user')
 export default class UserController {
@@ -16,16 +25,15 @@ export default class UserController {
   }
 
   @httpGet('/:id')
-  public async getUser (
-    @request() request: Request
-  ) {
-    const { id } = request.params
+  public async getUser (@requestParam('id') id: string) {
     return this._userService.getUser(id)
   }
 
-  @httpPost('/')
-  public createUser (request: Request) {
-    console.log('create user')
+  @httpPost('/', userValidator)
+  public createUser (@request() { body }: Request) {
+    const { username, email } = body
+
+    return this._userService.createUser({ username, email })
   }
 
   @httpPatch('/:id')
