@@ -1,0 +1,16 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
+build:
+  stage: build
+  tags: 
+    - docker
+  script:
+    - docker build -t wishlist-api -f ./Dockerfile.production .
+  only:
+    - master
