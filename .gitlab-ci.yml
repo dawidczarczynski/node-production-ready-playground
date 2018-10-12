@@ -4,7 +4,17 @@ services:
   - docker:dind
 
 stages:
+  - test
   - build
+
+test:
+  stage: test
+  tags:
+    - docker
+  image: node
+  script:
+    - yarn
+    - yarn test
 
 build:
   stage: build
