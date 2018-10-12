@@ -1,4 +1,6 @@
-# Wishlist API [![pipeline status](https://gitlab.com/ria-wishlist/wishlist-user/badges/master/pipeline.svg)](https://gitlab.com/ria-wishlist/wishlist-user/commits/master)
+# Wishlist API 
+[![build status](https://gitlab.com/ria-wishlist/wishlist-api/badges/master/build.svg)](https://gitlab.com/ria-wishlist/wishlist-api/commits/master)
+[![coverage report](https://gitlab.com/ria-wishlist/wishlist-api/badges/master/coverage.svg)](https://gitlab.com/ria-wishlist/wishlist-api/commits/master)
 
 ## Installation
 
