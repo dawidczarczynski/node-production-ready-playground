@@ -2,8 +2,9 @@ import * as joi from 'joi'
 import { Request, Response, NextFunction } from 'express'
 
 import { BadRequestError } from '@errors'
+import { IUser } from '@user/model/user.interface'
 
-export const userSchema = joi.object({
+const userSchema = joi.object({
   username: joi.string()
     .alphanum()
     .min(3)
@@ -14,8 +15,8 @@ export const userSchema = joi.object({
     .required()
 })
 
-export const userValidator = (request: Request, response: Response, next: NextFunction) => {
-  const { error } = joi.validate(request.body, userSchema)
+export const validateUser = (user: IUser) => {
+  const { error } = joi.validate(user, userSchema)
 
   if (error) {
     const { details } = error
@@ -23,6 +24,10 @@ export const userValidator = (request: Request, response: Response, next: NextFu
 
     throw new BadRequestError(message)
   }
+}
+
+export const userValidator = (request: Request, response: Response, next: NextFunction) => {
+  validateUser(request.body)
 
   return next()
 }
