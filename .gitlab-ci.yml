@@ -5,6 +5,7 @@ services:
 
 stages:
   - test
+  - deploy_coverage
   - build
 
 test:
@@ -15,6 +16,24 @@ test:
   script:
     - yarn
     - yarn test
+  artifacts:
+    paths:
+      - coverage/
+
+coverage:
+  stage: deploy_coverage
+  dependencies:
+    - test
+  tags:
+    - docker
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - master
 
 build:
   stage: build
