@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import { Schema, Document, Types } from 'mongoose'
+import { Schema, Document, Types, Model } from 'mongoose'
 
 import { IDatabase, DBErrors } from '@database'
 import { DbDuplicatedKeyError, DbInternalError, DbInvalidIdentificator } from '@errors'
@@ -13,7 +13,7 @@ export abstract class GenericRepository<T extends Document> {
     private _model: string
   ) {}
 
-  public async model () {
+  private async model (): Promise<Model<T>> {
     const instance = await this._db.connect()
 
     return instance
@@ -37,7 +37,7 @@ export abstract class GenericRepository<T extends Document> {
     }
   }
 
-  public async findOne (id: string): Promise<T> {
+  public async findById (id: string): Promise<T> {
     const model = await this.model()
 
     /**
@@ -56,6 +56,12 @@ export abstract class GenericRepository<T extends Document> {
     const model = await this.model()
 
     return model.find()
+  }
+
+  protected async findOne (query: any): Promise<T> {
+    const model = await this.model()
+
+    return model.findOne(query)
   }
 
 }

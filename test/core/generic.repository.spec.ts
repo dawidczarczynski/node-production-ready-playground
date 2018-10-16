@@ -36,7 +36,8 @@ describe('Generic Repository', function () {
   })
 
   it('should create an instance of database model', function (done) {
-    const model = repository.model()
+    // Private method test
+    const model = repository['model']()
 
     model.should.eventually.be.equal(databaseModel).and.notify(done)
   })
@@ -48,7 +49,7 @@ describe('Generic Repository', function () {
       const model = { test: 'Test', test1: 'Test1' }
       databaseModel.modelInstance = model
 
-      const oneItem = repository.findOne(validId)
+      const oneItem = repository.findById(validId)
 
       oneItem.should.eventually.be.equal(model).and.notify(done)
     })
@@ -56,7 +57,7 @@ describe('Generic Repository', function () {
     it('should throw exception if identificator is in wrong format', function (done) {
       const invalidId = 'some-random%invalid_id'
 
-      const oneItem = repository.findOne(invalidId)
+      const oneItem = repository.findById(invalidId)
 
       oneItem.should.be.rejectedWith(DbInvalidIdentificator, 'Invalid format of identificator').and.notify(done)
     })
