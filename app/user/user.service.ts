@@ -9,11 +9,12 @@ import {
   InternalError
 } from '@errors'
 import { IUserRepository } from '@user/user-repository.interface'
+import { USER_TYPES } from '@user/ioc/user.types'
 
 @injectable()
 export class UserService {
 
-  constructor (@inject('IUserRepository') private _repo: IUserRepository) {}
+  constructor (@inject(USER_TYPES.repository) private _repo: IUserRepository) {}
 
   public async getUser (id: string): Promise<IUser> {
     const user = await this._repo.findById(id)

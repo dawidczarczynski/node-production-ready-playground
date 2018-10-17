@@ -1,4 +1,5 @@
 import { Request } from 'express'
+import { inject } from 'inversify'
 import {
   controller,
   httpGet,
@@ -11,11 +12,12 @@ import {
 
 import { UserService } from './user.service'
 import { userValidator } from './user.validator'
+import { USER_TYPES } from '@user/ioc/user.types'
 
 @controller('/user')
 export default class UserController {
 
-  constructor (private _userService: UserService) {}
+  constructor (@inject(USER_TYPES.service) private _userService: UserService) {}
 
   @httpGet('/')
   public async getAllUsers () {
