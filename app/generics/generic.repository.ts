@@ -20,23 +20,6 @@ export abstract class GenericRepository<T extends Document> {
       .model<T>(this._model, this._schema)
   }
 
-  public async add<U> (data: U): Promise<T> {
-    const Model = await this.model()
-    const entity = new Model(data)
-
-    try {
-      return await entity.save()
-    } catch (ex) {
-      /**
-       * Catch key duplication error
-       */
-      const duplicatedKeyError = ex.code === 11000
-      if (duplicatedKeyError) throw new DbDuplicatedKeyError(DBErrors.DUPLICATED_KEY)
-
-      throw new DbInternalError(DBErrors.UNKNOW_ERROR)
-    }
-  }
-
   public async findById (id: string): Promise<T> {
     const model = await this.model()
 
@@ -56,6 +39,23 @@ export abstract class GenericRepository<T extends Document> {
     const model = await this.model()
 
     return model.find()
+  }
+
+  protected async _add<U> (data: U): Promise<T> {
+    const Model = await this.model()
+    const entity = new Model(data)
+
+    try {
+      return await entity.save()
+    } catch (ex) {
+      /**
+       * Catch key duplication error
+       */
+      const duplicatedKeyError = ex.code === 11000
+      if (duplicatedKeyError) throw new DbDuplicatedKeyError(DBErrors.DUPLICATED_KEY)
+
+      throw new DbInternalError(DBErrors.UNKNOW_ERROR)
+    }
   }
 
   protected async findOne (query: any): Promise<T> {

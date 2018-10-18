@@ -1,6 +1,3 @@
-import 'reflect-metadata'
-import 'mocha'
-import 'chai/register-should'
 import * as chai from 'chai'
 import * as chaiAsPromised from 'chai-as-promised'
 chai.use(chaiAsPromised)
@@ -74,7 +71,7 @@ describe('Generic Repository', function () {
       const model = { test: 'Test', test1: 'Test1' }
       databaseModel.duplicatedKey = true
 
-      const savedItem = repository.add(model)
+      const savedItem = repository['_add'](model)
 
       savedItem.should.be.rejectedWith(DbDuplicatedKeyError, 'Some keys are not unique').and.notify(done)
     })
@@ -83,7 +80,7 @@ describe('Generic Repository', function () {
       const model = { test: 'Test', test1: 'Test1' }
       databaseModel.dbError = true
 
-      const savedItem = repository.add(model)
+      const savedItem = repository['_add'](model)
 
       savedItem.should.be.rejectedWith(DbInternalError, 'Database error occured').and.notify(done)
     })
@@ -91,7 +88,7 @@ describe('Generic Repository', function () {
     it('should save model', function (done) {
       const model = { test: 'Test', test1: 'Test1' }
 
-      const savedItem = repository.add(model)
+      const savedItem = repository['_add'](model)
 
       savedItem.should.eventually.be.equal(model).and.notify(done)
     })

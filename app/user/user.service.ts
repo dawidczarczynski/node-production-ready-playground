@@ -32,7 +32,7 @@ export class UserService {
     const newUser = new User(username, email)
 
     try {
-      return await this._repo.add<IUser>(newUser)
+      return await this._repo.add(newUser)
     } catch (ex) {
       if (ex instanceof DbDuplicatedKeyError) throw new BadRequestError(UserError.ALREADY_EXISTS)
       throw new InternalError(ex.message)
