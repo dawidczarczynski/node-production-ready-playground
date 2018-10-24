@@ -1,22 +1,18 @@
 import 'reflect-metadata'
 import { InversifyExpressServer } from 'inversify-express-utils'
-import * as bodyParser from 'body-parser'
 
-import { config } from './config'
-import container from './container'
-import { uncaughtErrorHandler, globalErrorHandler } from '@utils'
-import '@user/user.controller'
+import { App } from '@app'
+import { config } from '@config'
+import { uncaughtErrorHandler } from '@utils'
+import container from '@container'
 
-const { PORT } = config
-const server = new InversifyExpressServer(container)
+const { PORT, API_ROOT } = config
+
+const server = new InversifyExpressServer(container, null, { rootPath: API_ROOT })
 
 server
-  .setConfig(app => {
-    app.use(bodyParser.json())
-  })
-  .setErrorConfig(app => {
-    app.use(globalErrorHandler)
-  })
+  .setConfig(App.successConfig)
+  .setErrorConfig(App.errorConfig)
   .build()
   .listen(PORT)
 

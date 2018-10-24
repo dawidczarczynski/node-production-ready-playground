@@ -6,9 +6,9 @@ import { IDatabase } from '@database'
 import { GenericRepository } from '@generics/generic.repository'
 
 import { IUserDocument } from './model/user.document'
-import { IUserRepository } from '@user/user-repository.interface'
+import { IUserRepository } from '@user/interfaces/user-repository.interface'
 import { USER_TYPES } from '@user/ioc/user.types'
-import { IUser } from '@user/model/user.interface';
+import { IUser } from '@user/model/user.interface'
 
 @injectable()
 export class UserRepository extends GenericRepository<IUserDocument> implements IUserRepository {

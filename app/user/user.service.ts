@@ -8,7 +8,7 @@ import {
   BadRequestError,
   InternalError
 } from '@errors'
-import { IUserRepository } from '@user/user-repository.interface'
+import { IUserRepository } from '@user/interfaces/user-repository.interface'
 import { USER_TYPES } from '@user/ioc/user.types'
 
 @injectable()
