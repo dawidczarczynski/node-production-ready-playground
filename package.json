@@ -57,7 +57,7 @@
     "inversify": "^4.13.0",
     "inversify-express-utils": "^6.1.0",
     "joi": "^13.7.0",
-    "mongoose": "^5.3.1",
+    "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.12",
     "swagger-express-ts": "^1.0.0",
     "swagger-ui-dist": "^3.19.4"
