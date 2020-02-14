@@ -1,9 +1,8 @@
 {
-  "name": "wishlist-api",
+  "name": "node-production-ready-api",
   "version": "1.0.0",
-  "description": "Node microservice boilerplate",
   "main": "server.js",
-  "author": "Dawid <dawidczarczynski@gmail.com>",
+  "author": "Dawid Czarczynski <dawidczarczynski@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "rm -rf build && tsc",
